@@ -5,6 +5,31 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script>
+    /* 実験 */
+let csv_url = "https://raw.githubusercontent.com/kagami-nuit/Shogi-terms-Japanese-English-dictionary/main/dictionary.csv";
+let csv_file_name = "dictionary.csv";
+
+
+let request = new XMLHttpRequest();
+xhr.onload = function() {
+    console.log(request.status);
+    console.log(request.responseText);
+};
+xhr.open('GET', csv_url);
+xhr.send();
+
+
+request = new XMLHttpRequest();
+xhr.onload = function() {
+    console.log(request.status);
+    console.log(request.responseText);
+};
+xhr.open('GET', csv_file_name);
+xhr.send();
+
+    /* 実験 */
+
+    
     function get_lib() {
         return [
             ["~が好きだ", "--がすきだ", "like, be fond of"],
