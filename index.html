@@ -13,21 +13,21 @@ let csv_file_name = "dictionary.csv";
 
 
 let request = new XMLHttpRequest();
-xhr.onload = function() {
+request.onload = function() {
     console.log(request.status);
     console.log(request.responseText);
 };
-xhr.open('GET', csv_url);
-xhr.send();
+request.open('GET', csv_url);
+request.send();
 
 
 request = new XMLHttpRequest();
-xhr.onload = function() {
+request.onload = function() {
     console.log(request.status);
     console.log(request.responseText);
 };
-xhr.open('GET', csv_file_name);
-xhr.send();
+request.open('GET', csv_file_name);
+request.send();
 
     /* 実験 */
 
