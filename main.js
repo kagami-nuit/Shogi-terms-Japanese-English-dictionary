@@ -6,6 +6,7 @@ request.onload = function() {
     console.log(request.status);
     console.log(request.responseText);
     csv_lib = request.responseText.split('\n').map(r => r.split('\t'));
+    csv_lib = csv_lib.filter(row => row.length == 4);
 };
 request.open('GET', csv_file_name);
 request.send();
