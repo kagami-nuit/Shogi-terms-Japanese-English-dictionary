@@ -17,7 +17,7 @@ function get_lib() {
 function update_table() {
     var rows = get_lib();
     var kw = document.getElementById('search_word').value;
-    rows = rows.filter(row => row[0].includes(kw) || row[1].includes(kw));
+    rows = rows.filter(row => row[0].includes(kw) || row[1].includes(kw) || row[2].includes(kw));
 
     var element_rows = []
     rows.forEach(function(row) {
@@ -27,7 +27,7 @@ function update_table() {
         var td3 = document.createElement('td')
         td1.appendChild(document.createTextNode(row[0]))
         td2.appendChild(document.createTextNode(row[1]))
-        td3.appendChild(document.createTextNode(row[2]))
+        td3.appendChild(document.createTextNode(row[3]))
         tr.appendChild(td1);
         tr.appendChild(td2);
         tr.appendChild(td3);
