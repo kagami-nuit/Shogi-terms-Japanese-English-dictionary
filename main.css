@@ -1,0 +1,15 @@
+#search_part{
+    margin:20px;
+}
+
+#view_part{
+    margin:20px;
+}
+
+#view_part table thead{
+    background-color: #c0d0ff;
+}
+
+#view_part table tbody td:nth-child(even){
+    background-color: #f0f0f0;
+}
