@@ -1,12 +1,19 @@
 csv_lib = [];
 let csv_file_name = "dictionary.csv";
 let request = new XMLHttpRequest();
+
+COLUMN_JAPANESE = 0;
+COLUMN_JAPANESE_KANA = 1;
+COLUMN_JAPANESE_ROMAJI = 2;
+COLUMN_ENGLISH = 3;
+COLUMN_POSITION_URL = 4;
+
 request = new XMLHttpRequest();
 request.onload = function() {
     console.log(request.status);
     console.log(request.responseText);
     csv_lib = request.responseText.split('\n').map(r => r.split('\t'));
-    csv_lib = csv_lib.filter(row => row.length == 4);
+    csv_lib = csv_lib.filter(row => row.length >= 4);
 };
 request.open('GET', csv_file_name);
 request.send();
@@ -16,26 +23,36 @@ function get_lib() {
 }
 
 function update_table() {
-    var rows = get_lib();
-    var kw = document.getElementById('search_word').value;
-    rows = rows.filter(row => row[0].includes(kw) || row[1].includes(kw) || row[2].includes(kw));
+    let rows = get_lib();
+    let kw = document.getElementById('search_word').value;
+    rows = rows.filter(row => row[COLUMN_JAPANESE].includes(kw) || row[COLUMN_JAPANESE_KANA].includes(kw) || row[COLUMN_JAPANESE_ROMAJI].includes(kw));
 
-    var element_rows = []
+    let element_rows = [];
     rows.forEach(function(row) {
-        var tr = document.createElement('tr');
-        var td1 = document.createElement('td')
-        var td2 = document.createElement('td')
-        var td3 = document.createElement('td')
-        td1.appendChild(document.createTextNode(row[0]))
-        td2.appendChild(document.createTextNode(row[1]))
-        td3.appendChild(document.createTextNode(row[3]))
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td');
+        let td3 = document.createElement('td');
+        td1.appendChild(document.createTextNode(row[COLUMN_JAPANESE]));
+        td2.appendChild(document.createTextNode(row[COLUMN_JAPANESE_KANA]));
+        td3.appendChild(document.createTextNode(row[COLUMN_ENGLISH]));
         tr.appendChild(td1);
         tr.appendChild(td2);
         tr.appendChild(td3);
+
+        if (row.length > COLUMN_POSITION_URL && row[COLUMN_POSITION_URL]) {
+            let td = document.createElement('td');
+            let a = document.createElement('a');
+            a.setAttribute('href', row[COLUMN_POSITION_URL]);
+            a.appendChild(document.createTextNode('局面図'));
+            td.appendChild(a);
+            tr.appendChild(td);
+        }
+
         element_rows.push(tr);
     });
 
-    var tbody = document.getElementById('words_tbody');
+    let tbody = document.getElementById('words_tbody');
     while (tbody.firstChild) {
         tbody.removeChild(tbody.firstChild);
     }
