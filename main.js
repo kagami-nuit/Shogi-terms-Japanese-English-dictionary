@@ -40,14 +40,16 @@ function update_table() {
         tr.appendChild(td2);
         tr.appendChild(td3);
 
+        let td4 = document.createElement('td');
         if (row.length > COLUMN_POSITION_URL && row[COLUMN_POSITION_URL]) {
-            let td = document.createElement('td');
-            let a = document.createElement('a');
-            a.setAttribute('href', row[COLUMN_POSITION_URL]);
-            a.appendChild(document.createTextNode('局面図'));
-            td.appendChild(a);
-            tr.appendChild(td);
+            let pos_link = document.createElement('a');
+            pos_link.setAttribute('href', row[COLUMN_POSITION_URL]);
+            pos_link.setAttribute('target', '_blank');
+            pos_link.setAttribute('rel', 'noopener noreferrer');
+            pos_link.appendChild(document.createTextNode('局面図'));
+            td4.appendChild(pos_link);
         }
+        tr.appendChild(td4);
 
         element_rows.push(tr);
     });
